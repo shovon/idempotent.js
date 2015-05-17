@@ -1,0 +1,26 @@
+{
+  "name": "idempotent",
+  "version": "0.0.0",
+  "description": "Idempotent array operation helpers",
+  "homepage": "https://github.com/shovon/idempotent.js",
+  "author": "Salehen Shovon Rahman <sal@linux.com> (http://shovon.github.io)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovon/idempotent.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shovon/idempotent.js.git"
+  },
+  "main": "./index.js",
+  "scripts": {
+    "test": "npm run test:non-bound && npm run test:bound",
+    "test:bound": "mocha --require babelhook test-es7",
+    "test:non-bound": "mocha --compilers js:babel/register",
+    "build": "babel src/index.js > index.js && babel src/bound.js > bound.js"
+  },
+  "devDependencies": {
+    "babel": "^5.4.3",
+    "expect.js": "^0.3.1",
+    "mocha": "^2.2.5"
+  }
+}

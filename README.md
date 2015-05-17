@@ -1,0 +1,5 @@
+# Idempotent Operations for JavaScript Arrays
+
+By default, `Array.prototype`'s `push`, `pop`, `shift`, and `unshift` modify an array, which make for code that is very difficult to reason about. However, sometimes, you may want to perform an operation similar to `push`, `pop`, `shift`, or `unshift`. That is, you supply the original array, and derive a new one with the aforementioned operation applied, without ever modifying the original one. To put it more succinctly, you want to apply a `push`, `pop`, `shift`, or `unshift` operation that is idempotent. Unfortunately, with what JavaScript offers, for just those four operations, there are a lot of boilerplate involved.
+
+`idempotent.js` gives you the `push`, `pop`, `shift`, and `unshift` functions so that you can use an idempotent equivalent of those operations.
