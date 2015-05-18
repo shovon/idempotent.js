@@ -1,4 +1,4 @@
-import { push, pop, unshift, shift, setKey } from './src'
+import { push, pop, unshift, shift, setKey, sort } from './src'
 import expect from 'expect.js';
 
 describe('push', function () {
@@ -134,4 +134,55 @@ describe('setKey', function () {
     expect(underTest).to.eql({ foo: 42, bar: 24, baz: 100 })
 
   });
+});
+
+describe('sort', function () {
+
+  it('should sort an array with random elements, absent a sorter', () => {
+
+    const ref = [ 8, 3, 5, 1, 4, 6, 2, 7 ];
+    const underTest = sort(ref);
+
+    expect(ref).to.eql( [ 8, 3, 5, 1, 4, 6, 2, 7 ] );
+    expect(underTest).to.eql([ 1, 2, 3, 4, 5, 6, 7, 8 ]);
+
+  });
+
+  it('should sort an array of random elements, given a sorter', () => {
+
+    const ref = [
+      { value: 8 },
+      { value: 3 },
+      { value: 5 },
+      { value: 1 },
+      { value: 4 },
+      { value: 6 },
+      { value: 2 },
+      { value: 7 },
+    ];
+    const underTest = sort(ref, (a, b) => a.value - b.value);
+
+    expect(ref).to.eql([
+      { value: 8 },
+      { value: 3 },
+      { value: 5 },
+      { value: 1 },
+      { value: 4 },
+      { value: 6 },
+      { value: 2 },
+      { value: 7 },
+    ]);
+    expect(underTest).to.eql([
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+      { value: 4 },
+      { value: 5 },
+      { value: 6 },
+      { value: 7 },
+      { value: 8 },
+    ]);
+
+  });
+
 });

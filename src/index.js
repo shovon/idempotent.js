@@ -16,6 +16,12 @@ export function shift(arr) {
   return arr.slice(1, arr.length);
 }
 
+export function sort(arr, sorter) {
+  const copy = arr.slice();
+  if (sorter) { return copy.sort(sorter)}
+  return copy.sort();
+}
+
 export function setKey(obj, key, value) {
   return assign({}, obj, {
     [key]: value

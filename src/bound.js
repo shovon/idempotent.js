@@ -18,6 +18,12 @@ export function shift() {
   return this.slice(1, this.length);
 }
 
+export function sort(sorter) {
+  const copy = this.slice();
+  if (sorter) { return copy.sort(sorter)}
+  return copy.sort();
+}
+
 export function setKey(key, value) {
   return assign({}, this, {
     [key]: value

@@ -1,8 +1,8 @@
 # Idempotent Operations for JavaScript Arrays and Objects
 
-By default, `Array.prototype`'s `push`, `pop`, `shift`, and `unshift` modify an array, which make for code that is very difficult to reason about. However, sometimes, you may want to perform an operation similar to `push`, `pop`, `shift`, or `unshift`. That is, you supply the original array, and derive a new one with the aforementioned operation applied, without ever modifying the original one. To put it more succinctly, you want to apply a `push`, `pop`, `shift`, or `unshift` operation that is idempotent. Unfortunately, with what JavaScript offers, for just those four operations, there are a lot of boilerplate involved.
+By default, `Array.prototype`'s `sort`, `push`, `pop`, `shift`, and `unshift` modify an array, which make for code that is very difficult to reason about. However, sometimes, you may want to perform an operation similar to `sort`, `push`, `pop`, `shift`, or `unshift`. That is, you supply the original array, and derive a new one with the aforementioned operation applied, without ever modifying the original one. To put it more succinctly, you want to apply a `sort`, `push`, `pop`, `shift`, or `unshift` operation that is idempotent. Unfortunately, with what JavaScript offers, for just those five operations, there are a lot of boilerplate involved.
 
-`idempotent.js` gives you the `push`, `pop`, `shift`, and `unshift` functions so that you can use an idempotent equivalent of those operations.
+`idempotent.js` gives you the `sort` `push`, `pop`, `shift`, and `unshift` functions so that you can use an idempotent equivalent of those operations.
 
 It also provides a `setKey` helper function to return an object with a supplied property name set.
 
@@ -41,10 +41,10 @@ It becomes even more concise with ECMAScript 6's import syntax.
 ```javascript
 import { push, pop, shift, unshift } from 'idempotent';
 
-var arr1 = [];
+const arr1 = [];
 
-var arr2 = push(arr1, 1);
-var arr3 = push(arr2, 2);
+const arr2 = push(arr1, 1);
+const arr3 = push(arr2, 2);
 
 arr1; // []
 arr2; // [ 1 ]
@@ -60,10 +60,10 @@ If you want to experiment ES 7 bind, create a `script.js` file, and paste in the
 ```javascript
 import { push, pop, shift, unshift } from 'idempotent/bound';
 
-var arr1 = [];
+const arr1 = [];
 
-var arr2 = arr1::push(1);
-var arr3 = arr2::push(2);
+const arr2 = arr1::push(1);
+const arr3 = arr2::push(2);
 
 console.log( arr1 ); // []
 console.log( arr2 ); // [ 1 ]
@@ -81,7 +81,7 @@ babel-node --stage 0 scripts.js
 The the new bind syntax now allow for chaining. So, instead of creating a new variable, or wrapping a push call with yet another push call, you would simply do:
 
 ```javascript
-var arr = anotherArr::pop()::unshift()::push(3)
+const arr = anotherArr::pop()::unshift()::push(3)
 ```
 
 ## License
