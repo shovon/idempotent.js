@@ -1,4 +1,4 @@
-import { push, pop, unshift, shift } from './src'
+import { push, pop, unshift, shift, setKey } from './src'
 import expect from 'expect.js';
 
 describe('push', function () {
@@ -101,5 +101,37 @@ describe('shift', function () {
 
     expect(ref).to.eql([ 'foo', 'bar', 'baz' ]);
     expect(underTest).to.eql([ 'bar', 'baz' ]);
+  });
+});
+
+describe('setKey', function () {
+  it('should return an entirely new object with the specified key set. Should work on an empty object', () => {
+
+    const ref = {};
+    const underTest = setKey(ref, 'foo', 42);
+
+    expect(ref).to.eql({});
+    expect(underTest).to.eql({ foo: 42 });
+
+  });
+
+  it('should return an entirely new object with the specified key set. Should work on an object with properties in it', () => {
+
+    const ref = { foo: 42, bar: 24 };
+    const underTest = setKey(ref, 'baz', 12);
+
+    expect(ref).to.eql({ foo: 42, bar: 24 });
+    expect(underTest).to.eql({ foo: 42, bar: 24, baz: 12 });
+
+  });
+
+  it('should override an existing property', () => {
+
+    const ref = { foo: 42, bar: 24, baz: 12 };
+    const underTest = setKey(ref, 'baz', 100);
+
+    expect(ref).to.eql({ foo: 42, bar: 24, baz: 12 });
+    expect(underTest).to.eql({ foo: 42, bar: 24, baz: 100 })
+
   });
 });

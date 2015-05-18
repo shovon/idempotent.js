@@ -1,3 +1,5 @@
+import assign from 'object-assign';
+
 export function push(arr, element) {
   return arr.concat([element]);
 }
@@ -12,4 +14,10 @@ export function pop(arr) {
 
 export function shift(arr) {
   return arr.slice(1, arr.length);
+}
+
+export function setKey(obj, key, value) {
+  return assign({}, obj, {
+    [key]: value
+  });
 }
