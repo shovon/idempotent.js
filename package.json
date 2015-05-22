@@ -1,7 +1,7 @@
 {
   "name": "idempotent",
   "description": "Idempotent array operation helpers",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "keywords": [
     "idempotence",
     "arrays",
@@ -20,7 +20,7 @@
     "url": "git://github.com/shovon/idempotent.js.git"
   },
   "bugs": {
-    "url": "https://github.com/shovon/idempotent.js.git"
+    "url": "https://github.com/shovon/idempotent.js/issues"
   },
   "license": "MIT",
   "main": "./index.js",

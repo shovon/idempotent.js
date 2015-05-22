@@ -1,31 +1,8 @@
-import assign from 'object-assign';
+const nonBound = require('./');
 
-// TODO: Use the original functions.
-
-export function push(element) {
-  return this.concat([element]);
-}
-
-export function unshift(element) {
-  return [element].concat(this);
-}
-
-export function pop() {
-  return this.slice(0, this.length - 1);
-}
-
-export function shift() {
-  return this.slice(1, this.length);
-}
-
-export function sort(sorter) {
-  const copy = this.slice();
-  if (sorter) { return copy.sort(sorter)}
-  return copy.sort();
-}
-
-export function setKey(key, value) {
-  return assign({}, this, {
-    [key]: value
-  });
-}
+Object.keys(nonBound).forEach(function (key) {
+  module.exports[key] = function (...params) {
+    const result = nonBound[key].call(nonBound, this, ...params);
+    return result;
+  }
+});

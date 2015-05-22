@@ -1,7 +1,5 @@
-import { push, pop, unshift, shift, setKey, sort } from './src/bound'
+import { push, pop, unshift, shift, setKey, setAt, sort } from './src/bound'
 import expect from 'expect.js';
-
-// TODO: dump this. All bound functions should be equivalent to the original.
 
 describe('push', function () {
   it('should push to an empty array', () => {
@@ -139,6 +137,60 @@ describe('setKey', function () {
     expect(underTest).to.eql({ foo: 42, bar: 24, baz: 100 })
 
   });
+});
+
+describe('setAt', function () {
+
+  it('should return a non-empty array, when setAt is applied to an empty array, with an index value of 0', () => {
+
+    const ref = [];
+    const underTest = ref::setAt(0, 42);
+
+    expect(ref).to.eql([]);
+    expect(underTest).to.eql([42]);
+
+  });
+
+  it('should return a non-empty array, when setAt is applied to an empty array, irrespective of the index value', () => {
+
+    const ref = [];
+    const underTest = ref::setAt(3, 42);
+
+    expect(ref).to.eql([]);
+    expect(underTest).to.eql([,,,42]);
+
+  });
+
+  it('should return an array larger than the original, given an index value equal to the length', () => {
+
+    const ref = [1, 2, 3];
+    const underTest = ref::setAt(3, 4);
+
+    expect(ref).to.eql([1, 2, 3]);
+    expect(underTest).to.eql([1, 2, 3, 4]);
+
+  });
+
+  it('should return an array larger than the original, given an index value greater than the length', () => {
+
+    const ref = [ 1, 2, 3 ];
+    const underTest = ref::setAt(5, 4);
+
+    expect(ref).to.eql([1, 2, 3]);
+    expect(underTest).to.eql([1, 2, 3, , , 4]);
+
+  });
+
+  it('should modify the element, at the specified index', () => {
+
+    const ref = ['foo', 'bar', 1, 42, 33];
+    const underTest = ref::setAt(2, 'trolololol');
+
+    expect(ref).to.eql(['foo', 'bar', 1, 42, 33]);
+    expect(underTest).to.eql(['foo', 'bar', 'trolololol', 42, 33]);
+
+  });
+
 });
 
 describe('sort', function () {

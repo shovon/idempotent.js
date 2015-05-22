@@ -1,51 +1,17 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
+var nonBound = require('./');
+
+Object.keys(nonBound).forEach(function (key) {
+  module.exports[key] = function () {
+    var _nonBound$key;
+
+    for (var _len = arguments.length, params = Array(_len), _key = 0; _key < _len; _key++) {
+      params[_key] = arguments[_key];
+    }
+
+    var result = (_nonBound$key = nonBound[key]).call.apply(_nonBound$key, [nonBound, this].concat(params));
+    return result;
+  };
 });
-
-// TODO: Use the original functions.
-
-exports.push = push;
-exports.unshift = unshift;
-exports.pop = pop;
-exports.shift = shift;
-exports.sort = sort;
-exports.setKey = setKey;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
-
-var _objectAssign = require('object-assign');
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function push(element) {
-  return this.concat([element]);
-}
-
-function unshift(element) {
-  return [element].concat(this);
-}
-
-function pop() {
-  return this.slice(0, this.length - 1);
-}
-
-function shift() {
-  return this.slice(1, this.length);
-}
-
-function sort(sorter) {
-  var copy = this.slice();
-  if (sorter) {
-    return copy.sort(sorter);
-  }
-  return copy.sort();
-}
-
-function setKey(key, value) {
-  return (0, _objectAssign2['default'])({}, this, _defineProperty({}, key, value));
-}
 

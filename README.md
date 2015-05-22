@@ -1,10 +1,10 @@
 # Idempotent Operations for JavaScript Arrays and Objects
 
-By default, `Array.prototype`'s `sort`, `push`, `pop`, `shift`, and `unshift` modify an array, which make for code that is very difficult to reason about. However, sometimes, you may want to perform an operation similar to `sort`, `push`, `pop`, `shift`, or `unshift`. That is, you supply the original array, and derive a new one with the aforementioned operation applied, without ever modifying the original one. To put it more succinctly, you want to apply a `sort`, `push`, `pop`, `shift`, or `unshift` operation that is idempotent. Unfortunately, with what JavaScript offers, for just those five operations, there are a lot of boilerplate involved.
+By default, most operations in JavaScript modify the internals of a specific value (object). Be it by calling `sort`, `push`/`pop`/`shift`/`unshift`, `reverse`, a custom method that modifies internals, or `obj.property = 'foo`; they all modify the internal value. And modifying values make for code that is very difficult to reason about. However, sometimes, it may be necessary to perform similar operations. But, instead of actually executing those operations, a better alternative is to perform idempotent operations that don't modify the internals of the original value. The the modification of those values are then returned as an entirely new object.
 
-`idempotent.js` gives you the `sort` `push`, `pop`, `shift`, and `unshift` functions so that you can use an idempotent equivalent of those operations.
+You can do so with `Array.prototype.slice` or `Object.assign`. But using `Array.prototype.slice` and `Object.assign` results in more verbose code, making it harder to read.
 
-It also provides a `setKey` helper function to return an object with a supplied property name set.
+And this is where `idempotent` comes in. `idempotent` provides a non-destructive analog of the aforementioned operations.
 
 ## Getting Started
 
@@ -34,9 +34,9 @@ arr2; // [ 1 ]
 arr3; // [ 1, 2 ]
 ```
 
-## With ECMAScript 6 and 7
+### With ECMAScript 6 and 7
 
-It becomes even more concise with ECMAScript 6's import syntax.
+It becomes concise with ECMAScript 6's import syntax.
 
 ```javascript
 import { push, pop, shift, unshift } from 'idempotent';
@@ -51,11 +51,11 @@ arr2; // [ 1 ]
 arr3; // [ 1, 2 ]
 ```
 
-### With ECMAScript 7's `::` (bind) operator
+#### With ECMAScript 7's `::` (bind) operator
 
 It becomes even more concise with a [proposed bind operator](https://github.com/zenparsing/es-function-bind) for ECMAScript 7. You can already use it, today, with [Babel 5.4](http://babeljs.io/blog/2015/05/14/function-bind/). Just be sure to enable stage 0 experimental features.
 
-If you want to experiment ES 7 bind, create a `script.js` file, and paste in the following code:
+If you want to experiment with ES 7 bind, create a `script.js` file, and paste in the following code:
 
 ```javascript
 import { push, pop, shift, unshift } from 'idempotent/bound';
@@ -76,13 +76,17 @@ Then, assuming you have `idempotent` installed from npm, run:
 babel-node --stage 0 scripts.js
 ```
 
-### Chaining with ECMAScript 7's `::` operator
+#### Chaining with ECMAScript 7's `::` operator
 
 The the new bind syntax now allow for chaining. So, instead of creating a new variable, or wrapping a push call with yet another push call, you would simply do:
 
 ```javascript
 const arr = anotherArr::pop()::unshift()::push(3)
 ```
+
+## Documentation
+
+The source code is annotated in a JavaDoc syntax. You can read it at [`blob/master/src/index.js`](https://github.com/shovon/idempotent.js/blob/master/src/index.js);
 
 ## License
 
