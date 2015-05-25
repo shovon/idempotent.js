@@ -3,6 +3,23 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+exports.push = push;
+exports.unshift = unshift;
+exports.pop = pop;
+exports.shift = shift;
+exports.sort = sort;
+exports.reverse = reverse;
+exports.setKey = setKey;
+exports.setAt = setAt;
+exports.assign = assign;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 /**
  * Returns a copy of the `arr` array, with the specified `element` appended to
@@ -12,7 +29,10 @@ Object.defineProperty(exports, '__esModule', {
  * @param {Anything} element
  * @return {Array[Anything]}
  */
-exports.push = push;
+
+function push(arr, element) {
+  return arr.concat([element]);
+}
 
 /**
  * Returns a copy of the `arr` array, with the specified `element` prepended to
@@ -22,7 +42,10 @@ exports.push = push;
  * @param {Anything} element
  * @return {Array[Anything]}
  */
-exports.unshift = unshift;
+
+function unshift(arr, element) {
+  return [element].concat(arr);
+}
 
 /**
  * Returns a copy of the `arr` array, with the element at the highest index
@@ -31,7 +54,10 @@ exports.unshift = unshift;
  * @param {Array[Anything]} arr
  * @return {Array[Anything]}
  */
-exports.pop = pop;
+
+function pop(arr) {
+  return arr.slice(0, arr.length - 1);
+}
 
 /**
  * Returns a copy of the `arr` array, with the element at the 0th index removed.
@@ -39,17 +65,36 @@ exports.pop = pop;
  * @param {Array[Anything]} arr
  * @return {Array[Anything]}
  */
-exports.shift = shift;
+
+function shift(arr) {
+  return arr.slice(1, arr.length);
+}
 
 /**
  * Returns a copy of the `arr` array, with all the elements sorted. Optionally,
  * you can supply a function that
  *
  * @param {Array[Anything]} arr
- * @param {Function : (a, b) -> Number}
+ * @param {Function : (Anything, Anything) -> Number}
  * @return {Array[Anything]}
  */
-exports.sort = sort;
+
+function sort(arr, sorter) {
+  var copy = arr.slice();
+  if (sorter) {
+    return copy.sort(sorter);
+  }
+  return copy.sort();
+}
+
+/**
+ * Returns a copy of the `arr` array, with all the elements placed in reverse
+ * from the original array.
+ */
+
+function reverse(arr) {
+  return arr.slice().reverse();
+}
 
 /**
  * Returns a copy of the `obj` object, with the element associated with the
@@ -60,7 +105,10 @@ exports.sort = sort;
  * @param {Anything} value
  * @return {Object}
  */
-exports.setKey = setKey;
+
+function setKey(obj, key, value) {
+  return assign(obj, _defineProperty({}, key, value));
+}
 
 /**
  * Returns a copy of the `arr` array, with element at the specified `index`
@@ -70,43 +118,6 @@ exports.setKey = setKey;
  * @param {Number} index
  * @param {Array[Anything]} value
  */
-exports.setAt = setAt;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
-
-var _objectAssign = require('object-assign');
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function push(arr, element) {
-  return arr.concat([element]);
-}
-
-function unshift(arr, element) {
-  return [element].concat(arr);
-}
-
-function pop(arr) {
-  return arr.slice(0, arr.length - 1);
-}
-
-function shift(arr) {
-  return arr.slice(1, arr.length);
-}
-
-function sort(arr, sorter) {
-  var copy = arr.slice();
-  if (sorter) {
-    return copy.sort(sorter);
-  }
-  return copy.sort();
-}
-
-function setKey(obj, key, value) {
-  return (0, _objectAssign2['default'])({}, obj, _defineProperty({}, key, value));
-}
 
 function setAt(arr, index, value) {
   var left = arr.slice(0, index);
@@ -115,5 +126,22 @@ function setAt(arr, index, value) {
   }
 
   return arr.slice(0, index).concat([value]).concat(arr.slice(index + 1, arr.length));
+}
+
+/**
+ * Assigns all properties from the source objects, to the specified destination
+ * object.
+ *
+ * @param {Object} destination
+ * @param {Object} source in sources
+ * @return {Object}
+ */
+
+function assign(destination) {
+  for (var _len = arguments.length, sources = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    sources[_key - 1] = arguments[_key];
+  }
+
+  return _objectAssign2['default'].apply(undefined, [{}, destination].concat(sources));
 }
 

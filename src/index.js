@@ -1,4 +1,4 @@
-import assign from 'object-assign';
+import objAssign from 'object-assign';
 
 /**
  * Returns a copy of the `arr` array, with the specified `element` appended to
@@ -8,9 +8,7 @@ import assign from 'object-assign';
  * @param {Anything} element
  * @return {Array[Anything]}
  */
-export function push(arr, element) {
-  return arr.concat([element]);
-}
+export function push(arr, element) { return arr.concat([element]); }
 
 /**
  * Returns a copy of the `arr` array, with the specified `element` prepended to
@@ -20,9 +18,7 @@ export function push(arr, element) {
  * @param {Anything} element
  * @return {Array[Anything]}
  */
-export function unshift(arr, element) {
-  return [element].concat(arr);
-}
+export function unshift(arr, element) { return [element].concat(arr); }
 
 /**
  * Returns a copy of the `arr` array, with the element at the highest index
@@ -31,9 +27,7 @@ export function unshift(arr, element) {
  * @param {Array[Anything]} arr
  * @return {Array[Anything]}
  */
-export function pop(arr) {
-  return arr.slice(0, arr.length - 1);
-}
+export function pop(arr) { return arr.slice(0, arr.length - 1); }
 
 /**
  * Returns a copy of the `arr` array, with the element at the 0th index removed.
@@ -41,16 +35,14 @@ export function pop(arr) {
  * @param {Array[Anything]} arr
  * @return {Array[Anything]}
  */
-export function shift(arr) {
-  return arr.slice(1, arr.length);
-}
+export function shift(arr) { return arr.slice(1, arr.length); }
 
 /**
  * Returns a copy of the `arr` array, with all the elements sorted. Optionally,
  * you can supply a function that
  *
  * @param {Array[Anything]} arr
- * @param {Function : (a, b) -> Number}
+ * @param {Function : (Anything, Anything) -> Number}
  * @return {Array[Anything]}
  */
 export function sort(arr, sorter) {
@@ -58,6 +50,12 @@ export function sort(arr, sorter) {
   if (sorter) { return copy.sort(sorter)}
   return copy.sort();
 }
+
+/**
+ * Returns a copy of the `arr` array, with all the elements placed in reverse
+ * from the original array.
+ */
+export function reverse(arr) { return arr.slice().reverse(); }
 
 /**
  * Returns a copy of the `obj` object, with the element associated with the
@@ -69,9 +67,7 @@ export function sort(arr, sorter) {
  * @return {Object}
  */
 export function setKey(obj, key, value) {
-  return assign({}, obj, {
-    [key]: value
-  });
+  return assign(obj, { [key]: value });
 }
 
 /**
@@ -94,4 +90,16 @@ export function setAt(arr, index, value) {
     .concat(
       arr.slice(index + 1, arr.length)
     );
+}
+
+/**
+ * Assigns all properties from the source objects, to the specified destination
+ * object.
+ *
+ * @param {Object} destination
+ * @param {Object} source in sources
+ * @return {Object}
+ */
+export function assign(destination, ...sources) {
+  return objAssign({}, destination, ...sources);
 }

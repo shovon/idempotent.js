@@ -1,10 +1,12 @@
 # Idempotent Operations for JavaScript Arrays and Objects
 
-By default, most operations in JavaScript modify the internals of a specific value (object). Be it by calling `sort`, `push`/`pop`/`shift`/`unshift`, `reverse`, a custom method that modifies internals, or `obj.property = 'foo`; they all modify the internal value. And modifying values make for code that is very difficult to reason about. However, sometimes, it may be necessary to perform similar operations. But, instead of actually executing those operations, a better alternative is to perform idempotent operations that don't modify the internals of the original value. The the modification of those values are then returned as an entirely new object.
+By default, most operations in JavaScript modify the internals of a specific value (object). Be it by calling `sort`, `push`/`pop`/`shift`/`unshift`, `reverse`, a custom method that modifies internals, or something equivalent to `obj.property = 'foo`; they all modify the internal value.
 
-You can do so with `Array.prototype.slice` or `Object.assign`. But using `Array.prototype.slice` and `Object.assign` results in more verbose code, making it harder to read.
+Modifying values, though, makes for code that is very difficult to reason about. However, sometimes, it may be necessary to perform similar operations. But, instead of actually executing those operations, a better alternative is to perform idempotent operations that don't modify the internals of the original value. The modification of those values are then returned as an entirely new object, leaving the original intact.
 
-And this is where `idempotent` comes in. `idempotent` provides a non-destructive analog of the aforementioned operations.
+You can do so with `Array.prototype.slice` or `Object.assign`. But using `Array.prototype.slice` and `Object.assign` results in more verbose code.
+
+Fortunately, this is where `idempotent` comes in. `idempotent` provides a non-destructive analog of the aforementioned operations, and more.
 
 ## Getting Started
 
@@ -78,7 +80,7 @@ babel-node --stage 0 scripts.js
 
 #### Chaining with ECMAScript 7's `::` operator
 
-The the new bind syntax now allow for chaining. So, instead of creating a new variable, or wrapping a push call with yet another push call, you would simply do:
+The new bind syntax now allow for chaining. So, instead of creating a new variable, or wrapping a push call with yet another push call, you would simply do:
 
 ```javascript
 const arr = anotherArr::pop()::unshift()::push(3)
@@ -86,7 +88,7 @@ const arr = anotherArr::pop()::unshift()::push(3)
 
 ## Documentation
 
-The source code is annotated in a JavaDoc syntax. You can read it at [`blob/master/src/index.js`](https://github.com/shovon/idempotent.js/blob/master/src/index.js);
+The source code is annotated in a JavaDoc-like syntax. You can read it at [`blob/master/src/index.js`](https://github.com/shovon/idempotent.js/blob/master/src/index.js);
 
 ## License
 

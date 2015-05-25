@@ -1,4 +1,14 @@
-import { push, pop, unshift, shift, setKey, setAt, sort } from './src/bound'
+import {
+  push,
+  pop,
+  unshift,
+  shift,
+  setKey,
+  setAt,
+  sort,
+  reverse,
+  assign
+} from './src/bound';
 import expect from 'expect.js';
 
 describe('push', function () {
@@ -243,3 +253,49 @@ describe('sort', function () {
   });
 
 });
+
+describe('reverse', () => {
+
+  it('should yield an entirely new empty array, when calling reverse on an empty array', () => {
+
+    const ref = [];
+    const underTest = ref::reverse();
+
+    expect(ref).to.eql([]);
+    expect(underTest).to.eql([]);
+    expect(ref).to.not.be(underTest);
+
+  });
+
+  it('should yield an array, where it the content is reversed from the original', () => {
+
+    const ref = [1, 2, 3, 4, 5];
+    const underTest = ref::reverse();
+
+    expect(ref).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest).to.eql([5, 4, 3, 2, 1]);
+
+  });
+
+});
+
+describe('assign', () => {
+  it('should copy, key-by-key an object, absent additional parameters', () => {
+    const ref = { foo: 'bar', baz: 10 };
+
+    const underTest = ref::assign();
+
+    expect(ref).to.eql({ foo: 'bar', baz: 10 });
+    expect(underTest).to.eql({ foo: 'bar', baz: 10 });
+    expect(ref).to.not.be(underTest);
+  });
+
+  it('should return an object with the properties of the source object assigned to the destination object', () => {
+    const ref = { foo: 'bar', baz: 10 };
+
+    const underTest = ref::assign({ zazzle: 'dazzle' });
+
+    expect(ref).to.eql({ foo: 'bar', baz: 10 });
+    expect(underTest).to.eql({ foo: 'bar', baz: 10, zazzle: 'dazzle' });
+  });
+})
