@@ -54,8 +54,22 @@ export function sort(arr, sorter) {
 /**
  * Returns a copy of the `arr` array, with all the elements placed in reverse
  * from the original array.
+ *
+ * @param {Array[Anything]} arr
+ * @return
  */
 export function reverse(arr) { return arr.slice().reverse(); }
+
+/**
+ * Returns a copy of the `arr` array, with the element at the specified index
+ * removed.
+ *
+ * @param {Array[Anything]} arr
+ * @param {Integer} index
+ */
+export function removeAt(arr, index) {
+  return arr.slice(0, index).concat(arr.slice(index + 1, arr.length));
+}
 
 /**
  * Returns a copy of the `obj` object, with the element associated with the
@@ -79,7 +93,6 @@ export function setKey(obj, key, value) {
  * @param {Array[Anything]} value
  */
 export function setAt(arr, index, value) {
-  const left = arr.slice(0, index);
   if (arr.length <= index) {
     return arr.concat(Array(index - arr.length)).concat([value]);
   }

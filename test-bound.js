@@ -7,7 +7,8 @@ import {
   setAt,
   sort,
   reverse,
-  assign
+  assign,
+  removeAt
 } from './src/bound';
 import expect from 'expect.js';
 
@@ -299,3 +300,25 @@ describe('assign', () => {
     expect(underTest).to.eql({ foo: 'bar', baz: 10, zazzle: 'dazzle' });
   });
 })
+
+describe('removeAt', () => {
+  it('should remove the element at the specified index', () => {
+    const ref = [1, 2, 3, 4, 5];
+
+    const underTest = ref::removeAt(2);
+
+    expect(ref).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest).to.eql([1, 2, 4, 5]);
+  });
+
+  it('should not remove anything, given a value that is entirely out of bounds', () => {
+    const ref = [1, 2, 3, 4, 5];
+
+    const underTest = ref::removeAt(5);
+    const underTest2 = ref::removeAt(10);
+
+    expect(ref).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest2).to.eql([1, 2, 3, 4, 5]);
+  });
+});

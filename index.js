@@ -9,6 +9,7 @@ exports.pop = pop;
 exports.shift = shift;
 exports.sort = sort;
 exports.reverse = reverse;
+exports.removeAt = removeAt;
 exports.setKey = setKey;
 exports.setAt = setAt;
 exports.assign = assign;
@@ -90,10 +91,25 @@ function sort(arr, sorter) {
 /**
  * Returns a copy of the `arr` array, with all the elements placed in reverse
  * from the original array.
+ *
+ * @param {Array[Anything]} arr
+ * @return
  */
 
 function reverse(arr) {
   return arr.slice().reverse();
+}
+
+/**
+ * Returns a copy of the `arr` array, with the element at the specified index
+ * removed.
+ *
+ * @param {Array[Anything]} arr
+ * @param {Integer} index
+ */
+
+function removeAt(arr, index) {
+  return arr.slice(0, index).concat(arr.slice(index + 1, arr.length));
 }
 
 /**
@@ -120,7 +136,6 @@ function setKey(obj, key, value) {
  */
 
 function setAt(arr, index, value) {
-  var left = arr.slice(0, index);
   if (arr.length <= index) {
     return arr.concat(Array(index - arr.length)).concat([value]);
   }
