@@ -90,6 +90,10 @@ const arr = anotherArr::pop()::unshift()::push(3)
 
 The source code is annotated in a JavaDoc-like syntax. You can read it at [`blob/master/src/index.js`](https://github.com/shovon/idempotent.js/blob/master/src/index.js);
 
+## Developing
+
+Contributing to the library is encouraged. If you want to work on the code, then you simply have to clone the repo, and run `npm install`. After which, you test the changes you've made by running `npm test`.
+
 ## License
 
 `idempotent` is [MIT-Licensed](https://github.com/shovon/idempotent.js/blob/master/LICENSE).

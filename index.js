@@ -22,6 +22,12 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+var _debug = require('debug');
+
+var _debug2 = _interopRequireDefault(_debug);
+
+var debug = (0, _debug2['default'])('idempotent');
+
 /**
  * Returns a copy of the `arr` array, with the specified `element` appended to
  * the highest index of the array.
@@ -109,6 +115,10 @@ function reverse(arr) {
  */
 
 function removeAt(arr, index) {
+  if (isNaN(index) || index < 0 || index % 1 !== 0) {
+    debug('Was given a non-integer value ' + index);
+    return arr.slice();
+  }
   return arr.slice(0, index).concat(arr.slice(index + 1, arr.length));
 }
 

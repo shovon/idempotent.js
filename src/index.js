@@ -1,4 +1,7 @@
 import objAssign from 'object-assign';
+import debugLogger from 'debug';
+
+const debug = debugLogger('idempotent');
 
 /**
  * Returns a copy of the `arr` array, with the specified `element` appended to
@@ -68,6 +71,10 @@ export function reverse(arr) { return arr.slice().reverse(); }
  * @param {Integer} index
  */
 export function removeAt(arr, index) {
+  if (isNaN(index) || index < 0 || index % 1 !== 0) {
+    debug(`Was given a non-integer value ${index}`);
+    return arr.slice();
+  }
   return arr.slice(0, index).concat(arr.slice(index + 1, arr.length));
 }
 

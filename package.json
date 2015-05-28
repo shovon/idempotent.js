@@ -1,7 +1,7 @@
 {
   "name": "idempotent",
   "description": "Idempotent array operation helpers",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "keywords": [
     "idempotence",
     "arrays",
@@ -36,6 +36,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "debug": "^2.2.0",
     "object-assign": "^2.0.0"
   }
 }

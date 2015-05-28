@@ -328,4 +328,20 @@ describe('removeAt', () => {
     expect(underTest).to.eql([1, 2, 3, 4]);
 
   });
+
+  it('non-number indices should yield the original value (albeit with a different reference)', () => {
+
+    const ref = [1, 2, 3, 4, 5];
+
+    const underTest = removeAt(ref, -1);
+    const underTest2 = removeAt(ref, -10);
+
+    expect(ref).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest2).to.eql([1, 2, 3, 4, 5]);
+    expect(ref).to.not.be(underTest);
+    expect(underTest).to.not.be(underTest2);
+    expect(underTest2).to.not.be(ref);
+
+  });
 });
