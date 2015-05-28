@@ -321,4 +321,15 @@ describe('removeAt', () => {
     expect(underTest).to.eql([1, 2, 3, 4, 5]);
     expect(underTest2).to.eql([1, 2, 3, 4, 5]);
   });
+
+  it('should be able to remove the last element', () => {
+
+    const ref = [ 1, 2, 3, 4, 5 ];
+
+    const underTest = ref::removeAt(4);
+
+    expect(ref).to.eql([1, 2, 3, 4, 5]);
+    expect(underTest).to.eql([1, 2, 3, 4]);
+
+  });
 });

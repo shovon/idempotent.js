@@ -56,7 +56,7 @@ export function sort(arr, sorter) {
  * from the original array.
  *
  * @param {Array[Anything]} arr
- * @return
+ * @return {Array[Anything]}
  */
 export function reverse(arr) { return arr.slice().reverse(); }
 

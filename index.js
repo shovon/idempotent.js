@@ -93,7 +93,7 @@ function sort(arr, sorter) {
  * from the original array.
  *
  * @param {Array[Anything]} arr
- * @return
+ * @return {Array[Anything]}
  */
 
 function reverse(arr) {

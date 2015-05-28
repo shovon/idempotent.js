@@ -1,7 +1,7 @@
 {
   "name": "idempotent",
   "description": "Idempotent array operation helpers",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "keywords": [
     "idempotence",
     "arrays",
